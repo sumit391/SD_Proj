@@ -24,7 +24,6 @@ import jdraw.framework.FigureListener;
  * @author Christoph Denzler
  *
  */
-@SuppressWarnings("serial")
 public class Rect implements Figure {
 	/**
 	 * Use the java.awt.Rectangle in order to save/reuse code.

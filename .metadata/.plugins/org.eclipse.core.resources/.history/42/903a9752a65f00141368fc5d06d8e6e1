@@ -12,8 +12,6 @@ import jdraw.framework.DrawModel;
 import jdraw.framework.DrawModelEvent;
 import jdraw.framework.DrawModelListener;
 import jdraw.framework.Figure;
-import jdraw.framework.FigureEvent;
-import jdraw.framework.FigureListener;
 
 /**
  * Provide a standard behavior for the drawing model. This class initially does not implement the methods
@@ -22,7 +20,7 @@ import jdraw.framework.FigureListener;
  * @author Sumit Chouhan
  *
  */
-public class MyDrawModel implements DrawModel, FigureListener {
+public class MyDrawModel implements DrawModel,DrawModelListener {
 
 	private LinkedList<Figure> figures = new LinkedList<Figure>();
 	private LinkedList<DrawModelListener> drawModelListeners = new LinkedList<DrawModelListener>();
@@ -77,11 +75,7 @@ public class MyDrawModel implements DrawModel, FigureListener {
 	@Override
 	public void setFigureIndex(Figure f, int index) {
 		// TODO to be implemented
-		if (figures.indexOf(f)!=index){
-			figures.remove(f);
-			figures.add(index,f);
-			//notifying model listenrs
-		}
+		
 		//System.out.println("StdDrawModel.setFigureIndex has to be implemented");
 	}
 
@@ -95,9 +89,8 @@ public class MyDrawModel implements DrawModel, FigureListener {
 		//System.out.println("StdDrawModel.removeAllFigures has to be implemented");
 	}
 
-
 	@Override
-	public void figureChanged(FigureEvent e) {
+	public void modelChanged(DrawModelEvent 	e) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.LinkedList;
 
 import jdraw.framework.Figure;
-import jdraw.framework.FigureEvent;
 import jdraw.framework.FigureHandle;
 import jdraw.framework.FigureListener;
 
@@ -24,7 +23,6 @@ import jdraw.framework.FigureListener;
  * @author Christoph Denzler
  *
  */
-@SuppressWarnings("serial")
 public class Rect implements Figure {
 	/**
 	 * Use the java.awt.Rectangle in order to save/reuse code.
@@ -58,18 +56,14 @@ public class Rect implements Figure {
 	@Override
 	public void setBounds(Point origin, Point corner) {
 		rectangle.setFrameFromDiagonal(origin, corner);
-		for (FigureListener l:listeners){
-			l.figureChanged(new FigureEvent(this));
-		}
+		notifyAllListeners();
 		// TODO notification of change
 	}
 
 	@Override
 	public void move(int dx, int dy) {
 		rectangle.setLocation(rectangle.x + dx, rectangle.y + dy);
-		for (FigureListener l:listeners){
-			l.figureChanged(new FigureEvent(this));
-		}
+		notifyAllListeners();
 		// TODO notification of change
 	}
 
@@ -95,12 +89,10 @@ public class Rect implements Figure {
 	@Override
 	public void addFigureListener(FigureListener listener) {
 		// TODO Auto-generated method stub
-		listeners.add(listener);
 	}
 
 	@Override
 	public void removeFigureListener(FigureListener listener) {
-		listeners.remove(listener);
 		// TODO Auto-generated method stub
 	}
 
