@@ -4,11 +4,19 @@
 <beans>
 	<bean id="drawModel" class="jdraw.sumit.MyDrawModel"/>
 
+<<<<<<< HEAD
+	<bean id="drawView" class="jdraw.sumit.StdDrawView" singleton="false">
+		<constructor-arg><ref bean="drawModel"/></constructor-arg>
+	</bean>
+
+	<bean id="drawContext" class="jdraw.sumit.StdContext" singleton="false"
+=======
 	<bean id="drawView" class="jdraw.std.StdDrawView" singleton="false">
 		<constructor-arg><ref bean="drawModel"/></constructor-arg>
 	</bean>
 
 	<bean id="drawContext" class="jdraw.std.StdContext" singleton="false"
+>>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
 		init-method="initGUI"
 	>
 		<constructor-arg ref="drawView"/>

@@ -6,26 +6,17 @@
 package jdraw.figures;
 
 import java.awt.Color;
-<<<<<<< HEAD
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.LinkedList;
-import java.util.List;
-=======
-import jdraw.framework.FigureListener;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.List;
-import java.util.LinkedList;
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
 
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.LinkedList;
+import java.util.List;
+import java.awt.geom.Ellipse2D;
 import jdraw.framework.Figure;
 import jdraw.framework.FigureEvent;
 import jdraw.framework.FigureHandle;
 import jdraw.framework.FigureListener;
-<<<<<<< HEAD
 import jdraw.framework.FigureListener;
 /**
  * Represents rectangles in JDraw.
@@ -33,26 +24,13 @@ import jdraw.framework.FigureListener;
  * @author Sumit Chouhan
  *
  */
-=======
-
-/**
- * Represents rectangles in JDraw.
- * 
- * @author Christoph Denzler
- *
- */
-@SuppressWarnings("serial")
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
-public class Rect implements Figure {
+public class Ellipse implements Figure {
 	/**
 	 * Use the java.awt.Rectangle in order to save/reuse code.
 	 */
-	private java.awt.Rectangle rectangle;
-<<<<<<< HEAD
+	private Ellipse2D.Double ellipse;
 	
-=======
-	private LinkedList<FigureListener> listeners = new LinkedList<FigureListener>();
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
+	
 	/**
 	 * Create a new rectangle of the given dimension.
 	 * @param x the x-coordinate of the upper left corner of the rectangle
@@ -60,15 +38,11 @@ public class Rect implements Figure {
 	 * @param w the rectangle's width
 	 * @param h the rectangle's height
 	 */
-<<<<<<< HEAD
 	
-=======
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
-	public Rect(int x, int y, int w, int h) {
-		rectangle = new java.awt.Rectangle(x, y, w, h);
+	public Ellipse(int x, int y, int w, int h) {
+		ellipse	 = new	 Ellipse2D.Double(x, y, w, h);
 	}
 
-<<<<<<< HEAD
 	private LinkedList<FigureListener> listeners = new LinkedList<FigureListener>();
 	
 	public void notifyAllListeners(){
@@ -76,58 +50,42 @@ public class Rect implements Figure {
 			l.figureChanged(new FigureEvent(this));
 		}
 	}
-=======
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
 	/**
 	 * Draw the rectangle to the given graphics context.
 	 * @param g the graphics context to use for drawing.
 	 */
 	public void draw(Graphics g) {
 		g.setColor(Color.WHITE);
-		g.fillRect(rectangle.x, rectangle.y, 
-							 rectangle.width, rectangle.height);
+		g.fillOval((int)ellipse.x,(int)ellipse.y,(int)ellipse.width,(int)ellipse.height);
 		g.setColor(Color.BLACK);
-		g.drawRect(rectangle.x, rectangle.y, 
-							 rectangle.width, rectangle.height);
+		g.drawOval((int)ellipse.x,(int)ellipse.y,(int)ellipse.width,(int)ellipse.height);
 	}
 	
 	@Override
 	public void setBounds(Point origin, Point corner) {
-		rectangle.setFrameFromDiagonal(origin, corner);
-<<<<<<< HEAD
+		ellipse.setFrameFromDiagonal(origin, corner);
 		// done
 		notifyAllListeners();
 		
-=======
-		for (FigureListener l:listeners){
-			l.figureChanged(new FigureEvent(this));
-		}
-		// TODO notification of change
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
 	}
 
 	@Override
 	public void move(int dx, int dy) {
-		rectangle.setLocation(rectangle.x + dx, rectangle.y + dy);
-<<<<<<< HEAD
+		Rectangle border = new Rectangle(ellipse.getBounds());
+		border.setLocation(border.x+dx,border.y+dy);
 		// done
+		ellipse.setFrame(border);
 		notifyAllListeners();
-=======
-		for (FigureListener l:listeners){
-			l.figureChanged(new FigureEvent(this));
-		}
-		// TODO notification of change
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
 	}
 
 	@Override
 	public boolean contains(int x, int y) {
-		return rectangle.contains(x, y);
+		return ellipse.contains(x, y);
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return rectangle.getBounds();
+		return ellipse.getBounds();
 	}
 
 	/**
@@ -141,26 +99,16 @@ public class Rect implements Figure {
 
 	@Override
 	public void addFigureListener(FigureListener listener) {
-<<<<<<< HEAD
 		// done
 		if (!listeners.contains(listener)){
 			listeners.add(listener);
 		}
-=======
-		// TODO Auto-generated method stub
-		listeners.add(listener);
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
 	}
 
 	@Override
 	public void removeFigureListener(FigureListener listener) {
-<<<<<<< HEAD
 		// done
 		listeners.remove(listener);
-=======
-		listeners.remove(listener);
-		// TODO Auto-generated method stub
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
 	}
 
 	@Override
@@ -168,9 +116,6 @@ public class Rect implements Figure {
 		return null;
 	}
 
-<<<<<<< HEAD
 	
 
-=======
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
 }
