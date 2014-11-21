@@ -21,11 +21,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * The name of the class to be used is configured in file jdraw-context.xml
  * <P>
  * The application can be started with the command
-<<<<<<< HEAD
  * 
-=======
- * Sumit
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
  * <PRE>
  * java jdraw.JDraw
  * </PRE>

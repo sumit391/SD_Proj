@@ -16,7 +16,7 @@ import jdraw.framework.DrawModelListener;
 import jdraw.framework.Figure;
 import jdraw.framework.FigureHandle;
 import jdraw.framework.FigureListener;
-import jdraw.std.StdDrawModel;
+import jdraw.sumit.MyDrawModel;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class DrawModelTest {
 
 	@Before
 	public void setUp() {
-		m = new StdDrawModel();
+		m = new MyDrawModel();
 		f = new TestFigure();
 		cnt = 0;
 		type = null;

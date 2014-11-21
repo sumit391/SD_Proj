@@ -10,9 +10,12 @@ import java.awt.geom.Line2D;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import jdraw.figures.handles.LineEndHandle;
+import jdraw.figures.handles.LineStartHandle;
 import jdraw.framework.Figure;
 import jdraw.framework.FigureEvent;
 import jdraw.framework.FigureHandle;
@@ -24,13 +27,16 @@ import jdraw.framework.FigureListener;
  * @author Sumit Chouhan
  *
  */
-public class Line implements Figure {
+@SuppressWarnings("serial")
+public class Line extends AbstractFigure {
 	/**
 	 * Use the java.awt.Rectangle in order to save/reuse code.
 	 */
 	private static final int DIST = 5;
 	private Line2D.Double line;
+	// handles
 	
+	private ArrayList<FigureHandle> handles = new ArrayList<FigureHandle>(2);
 	
 	/**
 	 * Create a new line of the given dimension.
@@ -39,15 +45,13 @@ public class Line implements Figure {
 	
 	public Line(int x, int y, int w, int h) {
 		line = new Line2D.Double(x,y,x+w,y+h);
+		handles.add(new LineStartHandle(this));
+		handles.add(new LineEndHandle(this));
 	}
 
-	private LinkedList<FigureListener> listeners = new LinkedList<FigureListener>();
+	//private LinkedList<FigureListener> listeners = new LinkedList<FigureListener>();
 	
-	public void notifyAllListeners(){
-		for(FigureListener l : listeners){
-			l.figureChanged(new FigureEvent(this));
-		}
-	}
+	
 	/**
 	 * Draw the rectangle to the given graphics context.
 	 * @param g the graphics context to use for drawing.
@@ -63,7 +67,13 @@ public class Line implements Figure {
 		notifyAllListeners();
 		
 	}
-
+	public Point getStart() {
+		return new Point((int)line.getX1(), (int)line.getY1());
+	}
+	
+	public Point getEnd() {
+		return new Point((int)line.getX2(), (int)line.getY2());
+	}
 	@Override
 	public void move(int dx, int dy) {
 		line.x1+=dx;
@@ -90,22 +100,12 @@ public class Line implements Figure {
 	 * @see jdraw.framework.Figure#getHandles()
 	 */	
 	public List<FigureHandle> getHandles() {
-		return null;
+		return handles;
 	}
 
-	@Override
-	public void addFigureListener(FigureListener listener) {
-		// done
-		if (!listeners.contains(listener)){
-			listeners.add(listener);
-		}
-	}
+	
 
-	@Override
-	public void removeFigureListener(FigureListener listener) {
-		// done
-		listeners.remove(listener);
-	}
+	
 
 	@Override
 	public Figure clone() {

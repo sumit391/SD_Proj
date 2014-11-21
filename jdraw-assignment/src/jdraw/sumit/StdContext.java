@@ -13,14 +13,16 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 
-<<<<<<< HEAD
+import jdraw.actions.GroupFiguresAction;
+import jdraw.actions.UngroupFiguresAction;
+import jdraw.constrainers.GridConstrainer;
+import jdraw.constrainers.SnapGridConstrainer;
 import jdraw.figures.EllipseTool;
 import jdraw.figures.LineTool;
-=======
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
 import jdraw.figures.RectTool;
 import jdraw.framework.DrawModel;
 import jdraw.framework.DrawTool;
@@ -99,12 +101,14 @@ public class StdContext extends AbstractContext {
 		editMenu.add("Paste").setEnabled(false);
 
 		editMenu.addSeparator();
-		JMenuItem group = new JMenuItem("Group");
-		group.setEnabled(false);
+		
+		//adding groupfigureaction
+		JMenuItem group = new JMenuItem(new GroupFiguresAction(getView(),editMenu));
+		group.setEnabled(true);
 		editMenu.add(group);
-
-		JMenuItem ungroup = new JMenuItem("Ungroup");
-		ungroup.setEnabled(false);
+		//adding ungroupfigureactionn
+		JMenuItem ungroup = new JMenuItem(new UngroupFiguresAction(getView(),editMenu));
+		ungroup.setEnabled(true);
 		editMenu.add(ungroup);
 
 		editMenu.addSeparator();
@@ -128,10 +132,84 @@ public class StdContext extends AbstractContext {
 		orderMenu.add(backItem);
 		editMenu.add(orderMenu);
 
-		JMenu grid = new JMenu("Grid...");
-		grid.add("Grid 1");
-		grid.add("Grid 2");
-		grid.add("Grid 3");
+		JMenu grid = new JMenu("Grid");
+		//setting the constrainers
+		
+		getView().setConstrainer(new GridConstrainer(1)); //default option
+		
+		final JRadioButtonMenuItem snapGrid= new JRadioButtonMenuItem("Snap Grid");
+		final JRadioButtonMenuItem noGrid= new JRadioButtonMenuItem("No Grid");
+		noGrid.setSelected(true);
+		final JRadioButtonMenuItem grid10= new JRadioButtonMenuItem("Grid 10x10");
+		final JRadioButtonMenuItem grid50= new JRadioButtonMenuItem("Grid 50x50");
+		
+		noGrid.addActionListener(new ActionListener(){
+			// When the actionevent occurs the objects 	actionPerformed method is invoked
+			@Override
+			public void actionPerformed(ActionEvent a) { 
+				// TODO Auto-generated method stub
+				getView().getConstrainer().deactivate();
+				getView().setConstrainer(new GridConstrainer(1));
+				getView().getConstrainer().activate();
+				snapGrid.setSelected(false);
+				noGrid.setSelected(true);
+				grid10.setSelected(false);
+				grid50.setSelected(false);
+				getView().repaint();
+			}
+			
+		});
+		
+		grid10.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				getView().getConstrainer().deactivate();
+				
+				getView().setConstrainer(new GridConstrainer(10));
+				getView().getConstrainer().activate();
+				
+				snapGrid.setSelected(false);
+				noGrid.setSelected(false);
+				grid10.setSelected(true);
+				grid50.setSelected(false);
+				
+				getView().repaint();
+			}
+		});
+		
+		grid50.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				getView().getConstrainer().deactivate();
+				
+				getView().setConstrainer(new GridConstrainer(50));
+				getView().getConstrainer().activate();
+				
+				snapGrid.setSelected(false);
+				noGrid.setSelected(false);
+				grid10.setSelected(false);
+				grid50.setSelected(true);
+				
+				getView().repaint();
+			}
+		});
+		
+		snapGrid.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){				
+				getView().getConstrainer().deactivate();
+				getView().setConstrainer(new SnapGridConstrainer(getView()));
+				getView().getConstrainer().activate();
+				
+				snapGrid.setSelected(true);
+				noGrid.setSelected(false);
+				grid10.setSelected(false);
+				grid50.setSelected(false);
+				
+				getView().repaint();
+			}
+		});
+		grid.add(noGrid);
+		grid.add(grid10);
+		grid.add(grid50);
+		grid.add(snapGrid);
 		editMenu.add(grid);
 		
 		return editMenu;
@@ -179,13 +257,10 @@ public class StdContext extends AbstractContext {
 		// TODO Add new figure tools here
 		DrawTool rectangleTool = new RectTool(this);
 		addTool(rectangleTool);
-<<<<<<< HEAD
 		DrawTool lineTool = new LineTool(this);
 		addTool(lineTool);
 		DrawTool ellipseTool = new EllipseTool(this);
 		addTool(ellipseTool);
-=======
->>>>>>> a903ca582a53c748e6b938fce902a5246e41f7fd
 	}
 
 	/**

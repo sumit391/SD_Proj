@@ -6,13 +6,18 @@
 package jdraw.figures;
 
 import java.awt.Color;
-
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Ellipse2D;
+
+import jdraw.figures.handles.EHandle;
+import jdraw.figures.handles.NHandle;
+import jdraw.figures.handles.SHandle;
+import jdraw.figures.handles.WHandle;
 import jdraw.framework.Figure;
 import jdraw.framework.FigureEvent;
 import jdraw.framework.FigureHandle;
@@ -24,12 +29,14 @@ import jdraw.framework.FigureListener;
  * @author Sumit Chouhan
  *
  */
-public class Ellipse implements Figure {
+@SuppressWarnings("serial")
+public class Ellipse extends AbstractFigure {
 	/**
 	 * Use the java.awt.Rectangle in order to save/reuse code.
 	 */
 	private Ellipse2D.Double ellipse;
-	
+	// handles
+	private ArrayList<FigureHandle> handles = new ArrayList<FigureHandle>(4);
 	
 	/**
 	 * Create a new rectangle of the given dimension.
@@ -40,16 +47,16 @@ public class Ellipse implements Figure {
 	 */
 	
 	public Ellipse(int x, int y, int w, int h) {
-		ellipse	 = new	 Ellipse2D.Double(x, y, w, h);
+		ellipse	 = new Ellipse2D.Double(x, y, w, h);
+		handles.add(new EHandle(this));
+		handles.add(new NHandle(this));
+		handles.add(new WHandle(this));
+		handles.add(new SHandle(this));
+
 	}
 
-	private LinkedList<FigureListener> listeners = new LinkedList<FigureListener>();
+	//private LinkedList<FigureListener> listeners = new LinkedList<FigureListener>();
 	
-	public void notifyAllListeners(){
-		for(FigureListener l : listeners){
-			l.figureChanged(new FigureEvent(this));
-		}
-	}
 	/**
 	 * Draw the rectangle to the given graphics context.
 	 * @param g the graphics context to use for drawing.
@@ -94,23 +101,10 @@ public class Ellipse implements Figure {
 	 * @see jdraw.framework.Figure#getHandles()
 	 */	
 	public List<FigureHandle> getHandles() {
-		return null;
+		return handles;
 	}
 
-	@Override
-	public void addFigureListener(FigureListener listener) {
-		// done
-		if (!listeners.contains(listener)){
-			listeners.add(listener);
-		}
-	}
-
-	@Override
-	public void removeFigureListener(FigureListener listener) {
-		// done
-		listeners.remove(listener);
-	}
-
+	
 	@Override
 	public Figure clone() {
 		return null;

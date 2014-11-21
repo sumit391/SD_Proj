@@ -143,7 +143,7 @@ public final class StdDrawView extends JComponent implements DrawView {
 	 * @param mode
 	 *         indicates from which method this method is called (mousePressed, mouseDragged
 	 *         or mouseReleased). Depending on the source, this method in addition calls
-	 *         mouseDown and mouseUp on the constrainer instance (if it is set).
+	 *         mouseDown and  on the constrainer instance (if it is set).
 	 * @return a point that is the result of constraining p, ie. the new
 	 *         location of p according to the constrainer.
 	 */
@@ -355,7 +355,7 @@ public final class StdDrawView extends JComponent implements DrawView {
 				model.getDrawCommandHandler().beginScript();
 				context.getTool().mouseDown(p.x, p.y, e);
 			}
-			dragging++;
+			dragging++;//dragging??
 		}
 
 		@Override
