@@ -37,8 +37,8 @@ public interface Figure extends java.io.Serializable, Cloneable {
 	 */
 	void move(int dx, int dy);
 
-	/**
-	 * Tests whether the mouse coordinates are contained in the figure. contains
+	 /* Tests whether the mouse coordinates are contained in the figure. contains
+	 /**
 	 * is called when the mouse is pressed in the grafic in order to decide
 	 * which figure has to be selected.
 	 * 
@@ -105,5 +105,5 @@ public interface Figure extends java.io.Serializable, Cloneable {
 	 * 
 	 * @return clone of figure
 	 */
-	Figure clone();
+	Object clone();
 }			

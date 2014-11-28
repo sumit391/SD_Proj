@@ -17,7 +17,10 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 
+import jdraw.actions.CopyAction;
+import jdraw.actions.CutAction;
 import jdraw.actions.GroupFiguresAction;
+import jdraw.actions.PasteAction;
 import jdraw.actions.UngroupFiguresAction;
 import jdraw.constrainers.GridConstrainer;
 import jdraw.constrainers.SnapGridConstrainer;
@@ -96,10 +99,11 @@ public class StdContext extends AbstractContext {
 		});
 
 		editMenu.addSeparator();
-		editMenu.add("Cut").setEnabled(false);
-		editMenu.add("Copy").setEnabled(false);
-		editMenu.add("Paste").setEnabled(false);
-
+		//add cut copy and paste functions
+		editMenu.add(new JMenuItem(new CutAction(getView(), editMenu)));
+		editMenu.add(new JMenuItem(new CopyAction(getView(), editMenu)));
+		editMenu.add(new JMenuItem(new PasteAction(getView(), editMenu)));
+		
 		editMenu.addSeparator();
 		
 		//adding groupfigureaction
@@ -255,12 +259,21 @@ public class StdContext extends AbstractContext {
 	@Override
 	protected void doRegisterDrawTools() {
 		// TODO Add new figure tools here
-		DrawTool rectangleTool = new RectTool(this);
+		// use factory pattern
+		/*DrawTool rectangleTool = new RectTool(this);
 		addTool(rectangleTool);
 		DrawTool lineTool = new LineTool(this);
 		addTool(lineTool);
 		DrawTool ellipseTool = new EllipseTool(this);
-		addTool(ellipseTool);
+		addTool(ellipseTool);*/
+		for (DrawToolFactory d:getToolFactories()){
+			if (d==null){
+				addTool(null);
+			}
+			else{
+				addTool(d.createTool(this));
+			}
+		}
 	}
 
 	/**

@@ -48,7 +48,13 @@ public class GroupFigure extends AbstractFigure implements FigureGroup{
 	}
 
 	@Override
-	public void setBounds(Point origin, Point corner) {		
+	public void setBounds(Point origin, Point corner) {
+		for(Figure f: components){
+			//border.add(f.getBounds());
+			//f.setBounds(origin, corner);
+			
+			
+		} 
 	}
 
 	@Override
@@ -71,12 +77,12 @@ public class GroupFigure extends AbstractFigure implements FigureGroup{
 	public Iterable<Figure> getFigureParts() {
 		return components;
 	}
-	/*
+	
 	@Override
 	public Object clone(){
 		GroupFigure newF;
 		newF=(GroupFigure) super.clone();
-		
+		// needs to be deep copied as figures need to be cloned too
 		LinkedList<Figure> newComponents= new LinkedList<Figure>();
 		for(Figure f: components){
 			newComponents.add((Figure) f.clone());
@@ -90,7 +96,7 @@ public class GroupFigure extends AbstractFigure implements FigureGroup{
 		newF.handles.add(new SEHandle(newF));
 		
 		return newF;
-	}*/
+	}
 	 
 
 }

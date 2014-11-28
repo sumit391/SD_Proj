@@ -18,31 +18,31 @@
 
 		<constructor-arg>
 			<list>	<!-- null represents a separator -->
-<!--
+
 				<ref bean="line"/>
 				<ref bean="rectangle"/>
-				<ref bean="oval"/>
--->
+				<ref bean="ellipse"/>
+				<null/>
 			</list>
 		</constructor-arg>
 	</bean>
 
 
-<!--
-	<bean id="rectangle" class="jdraw.figures.RectangleToolFactory">
-		<property name="name"><value>Rectangle</value></property>
-		<property name="iconName"><value>rectangle.png</value></property>
-	</bean>
-	
 	<bean id="line" class="jdraw.figures.LineToolFactory">
 		<property name="name"><value>Line</value></property>
 		<property name="iconName"><value>line.png</value></property>
 	</bean>
-
-	<bean id="oval" class="jdraw.figures.OvalToolFactory">
-		<property name="name"><value>Oval</value></property>
+	
+	<bean id="rectangle" class="jdraw.figures.RectToolFactory">
+		<property name="name"><value>Rectangle</value></property>
+		<property name="iconName"><value>rectangle.png</value></property>
+	</bean>
+	
+	
+	<bean id="ellipse" class="jdraw.figures.EllipseToolFactory">
+		<property name="name"><value>Ellipse</value></property>
 		<property name="iconName"><value>oval.png</value></property>
 	</bean>
--->
+
 
 </beans>

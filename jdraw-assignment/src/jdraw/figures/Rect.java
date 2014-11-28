@@ -104,8 +104,20 @@ public class Rect extends AbstractFigure {
 	}
 
 		@Override
-	public Figure clone() {
-		return null;
+	public Object clone() {
+			Rect newF;
+			newF = (Rect) super.clone();
+			newF.rectangle = new Rectangle(this.rectangle);
+			newF.handles = new ArrayList<FigureHandle>(8);
+			newF.handles.add(new EHandle(newF));
+			newF.handles.add(new NEHandle(newF));
+			newF.handles.add(new NHandle(newF));
+			newF.handles.add(new NWHandle(newF));
+			newF.handles.add(new WHandle(newF));
+			newF.handles.add(new SWHandle(newF));
+			newF.handles.add(new SHandle(newF));
+			newF.handles.add(new SEHandle(newF));
+			return newF;
 	}
 
 	

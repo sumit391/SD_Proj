@@ -51,6 +51,7 @@ public class GroupFiguresAction extends AbstractAction implements MenuListener{
 		//remove figures to be grouped from draw model
 		for (Figure f: figureToGroup){
 			view.getModel().removeFigure(f);
+			//add the method to give the setindex here
 			view.removeFromSelection(f);
 		}
 		//add figure group to draw model

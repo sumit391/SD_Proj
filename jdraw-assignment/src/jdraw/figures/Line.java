@@ -108,8 +108,14 @@ public class Line extends AbstractFigure {
 	
 
 	@Override
-	public Figure clone() {
-		return null;
+	public Object clone() {
+		Line newF;
+		newF = (Line) super.clone();
+		newF.line = new Line2D.Double(this.line.x1,this.line.y1,this.line.x2,this.line.y2);
+		newF.handles = new ArrayList<FigureHandle>(2);
+		newF.handles.add(new LineStartHandle(newF));
+		newF.handles.add(new LineEndHandle(newF));
+		return newF;
 	}
 
 	

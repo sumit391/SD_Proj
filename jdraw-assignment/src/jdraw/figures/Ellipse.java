@@ -106,8 +106,20 @@ public class Ellipse extends AbstractFigure {
 
 	
 	@Override
-	public Figure clone() {
-		return null;
+	public Object clone() {
+		Ellipse newF;		
+		
+		newF=(Ellipse) super.clone();
+		newF.ellipse= new Ellipse2D.Double(this.ellipse.x, this.ellipse.y,
+				this.ellipse.width, this.ellipse.height);
+		newF.handles= new ArrayList<FigureHandle>(4);
+		
+		newF.handles.add(new EHandle(newF));
+		newF.handles.add(new NHandle(newF));
+		newF.handles.add(new WHandle(newF));
+		newF.handles.add(new SHandle(newF));
+	
+		return newF;
 	}
 
 	

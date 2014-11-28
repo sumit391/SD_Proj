@@ -7,6 +7,7 @@ package jdraw.sumit;
 
 import java.util.LinkedList;
 
+import jdraw.commands.MyDrawCommandHandler;
 import jdraw.framework.DrawCommandHandler;
 import jdraw.framework.DrawModel;
 import jdraw.framework.DrawModelEvent;
@@ -62,7 +63,7 @@ public class MyDrawModel implements DrawModel, FigureListener {
 
 	/** The draw command handler. Initialized here with a dummy implementation. */
 	// TODO initialize with your implementation from the undo/redo-assignment.
-	private DrawCommandHandler handler = new EmptyDrawCommandHandler();
+	private DrawCommandHandler handler = new MyDrawCommandHandler();
 
 	/**
 	 * Retrieve the draw command handler in use.

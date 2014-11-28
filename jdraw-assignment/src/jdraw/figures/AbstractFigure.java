@@ -37,7 +37,7 @@ public abstract class AbstractFigure implements Figure{
 	}
 	
 	@Override
-	public Figure clone() {
+	public Object clone() {
 		AbstractFigure newF;
 		try {
 			newF=(AbstractFigure) super.clone();
